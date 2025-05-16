@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/notes_books",
+    "build": "vite build --base=/mcs-8-mchd-2-advanced-js-blended",
     "preview": "vite preview"
   },
   "devDependencies": {
