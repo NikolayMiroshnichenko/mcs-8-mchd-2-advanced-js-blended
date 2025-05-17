@@ -1,16 +1,52 @@
-/*
-  Створи список справ.
-  На сторінці є два інпути які має вводиться назва і текст задачі.
-  Після натискання на кнопку "Add" завдання додається до списку #task-list.
+import refs from "./js/refs.js";
+import { addTask, initTasks, removeTask } from "./js/tasks.js";
+import { renderTaskList } from "./js/render-tasks.js";
+import { loadTasks, changeTheme, loadTheme } from './js/local-storage-api.js';
+import { handlerTheme } from './js/theme-switcher.js';
 
-  У кожної картки має бути кнопка "Delete", щоб можна було
-  прибрати завдання зі списку.
-  Список із завданнями має бути доступним після перезавантаження сторінки.
+function init() {
+  const storegeTasks = loadTasks();
+  const storegeTheme = loadTheme();
 
-  Розмітка картки задачі
-  <li class="task-list-item">
-      <button class="task-list-item-btn">Delete</button>
-      <h3>Заголовок</h3>
-      <p>Текст</p>
-  </li>
-*/
+
+  initTasks(storegeTasks);
+  renderTaskList();
+
+  if (storegeTheme) {
+    refs.body.classList.add(storegeTheme);
+  };
+};
+
+
+refs.taskForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const title = event.target.taskName.value.trim();
+  const desc = event.target.taskDescription.value.trim();
+
+  if (!title || !desc) {
+    alert('Заповніть поля форми!')
+    return;
+  };
+
+  addTask(title, desc);
+  renderTaskList();
+
+  refs.taskForm.reset();
+});
+
+refs.taskList.addEventListener('click', (event) => {
+  if (event.target.tagName === 'BUTTON') {
+    const taskId = event.target.dataset.task_id;
+
+    removeTask(taskId);
+    renderTaskList();
+  }
+});
+
+refs.themeBtn.addEventListener('click', handlerTheme);
+
+init();
+
+
+
