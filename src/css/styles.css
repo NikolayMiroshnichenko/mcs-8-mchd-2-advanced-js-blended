@@ -1,13 +1,84 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-/* Common styles */
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 @import url('./reset.css');
 
-body {
-  background-color: red;
+.container {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+:root {
+  --header-bg: #e9ecef;
+  --header-color: #2d2d2d;
+  --accent-color: #007acc;
+  --accent-hover: #005fa3;
+  --input-bg: #f1f3f5;
+  --input-border: #bbb;
+}
+
+.main-header {
+  background-color: var(--header-bg);
+  color: var(--header-color);
+  padding: 1rem 0;
+  border-bottom: 1px solid #d1d1d1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input[type="text"] {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--header-color);
+  width: 240px;
+  transition: border 0.2s ease;
+}
+
+.search-form input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+.search-form input::placeholder {
+  color: #777;
+}
+
+.search-form button {
+  background-color: var(--accent-color);
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: var(--accent-hover);
 }
