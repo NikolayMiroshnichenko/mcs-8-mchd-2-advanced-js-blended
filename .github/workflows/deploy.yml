@@ -2,7 +2,7 @@ name: Build and deploy to GitHub Pages
 
 on:
   push:
-    branches: [lesson-1]
+    branches: [lesson-2]
 
 jobs:
   build-and-deploy:
@@ -19,5 +19,5 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          branch: gh-pages-lesson-1
+          branch: gh-pages-lesson-2
           folder: dist
