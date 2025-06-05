@@ -29,3 +29,6 @@ export const createMoviesMarkup = (movies) => {
 export const showLoader = (active) => {
     refs.loader.classList[active ? 'add' : 'remove']('active');
 }
+export const showResetBtn = (active) => {
+    refs.resetBtn.classList[active ? 'add' : 'remove']('active');
+}

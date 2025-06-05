@@ -124,6 +124,11 @@
   gap: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
+  display: none;
+}
+
+.reset-button.active {
+  display: block;
 }
 
 .reset-button:hover {
