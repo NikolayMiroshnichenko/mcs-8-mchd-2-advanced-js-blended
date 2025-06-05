@@ -14,14 +14,25 @@
   <header class="main-header">
     <div class="container header-content">
       <a href="#" class="logo">🎬 MoviesApp</a>
-      <form id="searchForm" class="search-form">
-        <input type="text" id="searchInput" placeholder="Пошук фільмів..." aria-label="Пошук фільмів" />
+      <form id="search-form" class="search-form">
+        <input type="text" name="movie" id="searchInput" placeholder="Пошук фільмів..." aria-label="Пошук фільмів" />
         <button type="submit">🔍</button>
       </form>
     </div>
   </header>
-  <main>
+  <main class="container">
+    <div class="main-wrapper">
+      <div class="main-title__wrapper">
+        <h2 class="main-title" id="main-title">Найпопулярніші фільми за тиждень</h2>
+        <!-- <button id="reset-btn" class="reset-button>
+          🧹 <span>Очистити</span>
+        </button> -->
+      </div>
+      <ul class="movie-list" id="list-movies">
 
+      </ul>
+      <span class="loader"></span>
+    </div>
 
   </main>
 
