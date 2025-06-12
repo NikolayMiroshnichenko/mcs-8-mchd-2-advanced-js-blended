@@ -143,6 +143,7 @@
   box-shadow: none;
 }
 
+/* movie */
 .movie-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -252,4 +253,21 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* load more btn */
+.load-more {
+  margin: 1.5rem auto 0 auto;
+  background-color: var(--accent-color);
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.load-more:hover {
+  background-color: var(--accent-hover);
 }
