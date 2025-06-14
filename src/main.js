@@ -1,13 +1,7 @@
 import { refs } from "./js/refs";
 import { resetMoviesList, showLoader, showLoadMoreBtn } from './js/render-functions';
-import { getTrendingMovies, getSearchMovies } from "./js/movies-api";
+import { getTrendingMovies, getSearchMovies, settings } from "./js/movies-api";
 import { handlerInitRequst, handlerSearchRequst } from "./js/utils";
-
-export const settings = {
-    currentPage: 1,
-    type: 'tranding',
-    qery: ''
-};
 
 async function init() {
     resetMoviesList();

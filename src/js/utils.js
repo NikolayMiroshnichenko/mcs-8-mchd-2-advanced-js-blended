@@ -1,6 +1,6 @@
 import { refs } from "./refs";
 import { createMoviesMarkup, showResetBtn, showLoader, showLoadMoreBtn } from "./render-functions";
-import { settings } from "../main";
+import { settings } from "./movies-api";
 
 export const handlerSearchRequst = (data, value = '') => {
     if (data?.results?.length > 0) {
@@ -28,7 +28,7 @@ export const handlerInitRequst = (data) => {
         refs.title.innerHTML = 'Найпопулярніші фільми за тиждень';
 
         if (data.page < data.total_pages) {
-            settings.currentPage = settings.currentPage += 1;
+            settings.currentPage = data.page += 1;
             showLoadMoreBtn(true);
         }
     } else {
