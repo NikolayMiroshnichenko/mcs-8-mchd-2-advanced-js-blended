@@ -1,7 +1,7 @@
 export const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZDU5NjBkZmE3YmY3ODdkYTU5NzdjMzA4NzkyNjcxOCIsIm5iZiI6MTYwMzQ4NTg3NC4wNDgsInN1YiI6IjVmOTM0MGIyN2ViNWYyMDA1YTAwY2ZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-35wsiUmFgUrlSH8Ef-TWv01vcbpp5ysK7oX-BURKOM';
 
 
-export const getTrendingMovies = async () => {
+export const getTrendingMovies = async (page = 1) => {
     try {
         const options = {
             method: 'GET',
@@ -12,7 +12,7 @@ export const getTrendingMovies = async () => {
             }
         };
 
-        const response = await fetch('https://api.themoviedb.org/3/trending/movie/week', options);
+        const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?page=${page}`, options);
         return response.json();
     } catch {
         alert('Помилка сервера')
@@ -20,7 +20,7 @@ export const getTrendingMovies = async () => {
     }
 };
 
-export const getSearchMovies = async (query = '') => {
+export const getSearchMovies = async (query = '', page = 1) => {
     if (!query) return false;
 
     try {
@@ -33,7 +33,7 @@ export const getSearchMovies = async (query = '') => {
             }
         };
 
-        const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}`, options);
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&page=${page}`, options);
         return response.json();
     } catch {
         alert('Помилка сервера')

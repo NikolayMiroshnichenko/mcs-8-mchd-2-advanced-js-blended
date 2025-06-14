@@ -257,6 +257,7 @@
 
 /* load more btn */
 .load-more {
+  display: none;
   margin: 1.5rem auto 0 auto;
   background-color: var(--accent-color);
   color: #fff;
@@ -270,4 +271,8 @@
 
 .load-more:hover {
   background-color: var(--accent-hover);
+}
+
+.load-more.active {
+  display: block;
 }

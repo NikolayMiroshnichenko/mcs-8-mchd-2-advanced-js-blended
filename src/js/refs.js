@@ -3,5 +3,6 @@ export const refs = {
     moviesList: document.querySelector('#list-movies'),
     loader: document.querySelector('.loader'),
     title: document.querySelector('#main-title'),
-    resetBtn: document.querySelector('#reset-btn')
+    resetBtn: document.querySelector('#reset-btn'),
+    loadMoreBtn: document.querySelector('#load-more')
 };

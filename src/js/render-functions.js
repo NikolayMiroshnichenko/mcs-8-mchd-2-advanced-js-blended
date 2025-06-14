@@ -37,3 +37,7 @@ export const showLoader = (show = false) => {
 export const showResetBtn = (show = false) => {
     refs.resetBtn.classList[show ? 'add' : 'remove']('active');
 }
+
+export const showLoadMoreBtn = (show = false) => {
+    refs.loadMoreBtn.classList[show ? 'add' : 'remove']('active');
+}

@@ -1,14 +1,20 @@
 import { refs } from "./js/refs";
-import { resetMoviesList, showLoader } from './js/render-functions';
+import { resetMoviesList, showLoader, showLoadMoreBtn } from './js/render-functions';
 import { getTrendingMovies, getSearchMovies } from "./js/movies-api";
 import { handlerInitRequst, handlerSearchRequst } from "./js/utils";
+
+export const settings = {
+    currentPage: 1,
+    type: 'tranding',
+    qery: ''
+};
 
 async function init() {
     resetMoviesList();
     showLoader(true);
 
     const data = await getTrendingMovies();
-    handlerInitRequst(data);
+    handlerInitRequst(data, settings.currentPage);
 };
 
 refs.form.addEventListener('submit', async (e) => {
@@ -28,4 +34,20 @@ refs.form.addEventListener('submit', async (e) => {
 });
 
 refs.resetBtn.addEventListener('click', init);
+
+refs.loadMoreBtn.addEventListener('click', async () => {
+    showLoader(true);
+    showLoadMoreBtn(false);
+
+    if (settings.type === 'tranding') {
+        const data = await getTrendingMovies(settings.currentPage);
+        handlerInitRequst(data);
+    } else {
+        const data = await getSearchMovies(settings.qery, settings.currentPage);
+        handlerSearchRequst(data);
+    }
+});
+
 init();
+
+
