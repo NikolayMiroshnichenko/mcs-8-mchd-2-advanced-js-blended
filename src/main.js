@@ -1,14 +1,34 @@
 import { refs } from "./js/refs";
-import { resetMoviesList, showLoader, showLoadMoreBtn } from './js/render-functions';
-import { getTrendingMovies, getSearchMovies, settings } from "./js/movies-api";
-import { handlerInitRequst, handlerSearchRequst } from "./js/utils";
+import { resetMoviesList, showLoader, showLoadMoreBtn, createMoviesMarkup, showResetBtn } from './js/render-functions';
+import { getTrendingMovies, getSearchMovies } from "./js/movies-api";
+
+let currentPage = 1;
+let isTrending = true;
 
 async function init() {
     resetMoviesList();
     showLoader(true);
 
     const data = await getTrendingMovies();
-    handlerInitRequst(data, settings.currentPage);
+
+    if (data?.results?.length > 0) {
+        const murkup = createMoviesMarkup(data?.results);
+
+        showLoader(false);
+        
+        refs.moviesList.insertAdjacentHTML('beforeend', murkup);
+        refs.title.innerHTML = 'Найпопулярніші фільми за тиждень';
+
+        if (data.page < data.total_pages) {
+            currentPage = data.page += 1;
+            showLoadMoreBtn(true);
+        }
+    } else {
+        showLoader(false);
+        refs.title.innerHTML = 'Поки що найпопулярніші фільми не доступні';
+    };
+
+    showResetBtn(false);
 };
 
 refs.form.addEventListener('submit', async (e) => {
@@ -21,7 +41,21 @@ refs.form.addEventListener('submit', async (e) => {
         showLoader(true);
 
         const data = await getSearchMovies(value);
-        handlerSearchRequst(data, value);
+
+        if (data?.results?.length > 0) {
+            const murkup = createMoviesMarkup(data?.results);
+
+            showLoader(false);
+            refs.moviesList.insertAdjacentHTML('beforeend', murkup);
+            refs.title.innerHTML = `Результат пошук за запитом: ${value}`;
+        } else {
+            showLoader(false);
+            refs.title.innerHTML = `Немає результату за Вашим запитом :(`;
+        };
+
+
+        refs.form.reset();
+        showResetBtn(true);
     } else {
         alert('Введіть значення!');
     };
@@ -33,12 +67,24 @@ refs.loadMoreBtn.addEventListener('click', async () => {
     showLoader(true);
     showLoadMoreBtn(false);
 
-    if (settings.type === 'tranding') {
-        const data = await getTrendingMovies(settings.currentPage);
-        handlerInitRequst(data);
+    if (isTrending) {
+        const data = await getTrendingMovies(currentPage);
+
+        if (data?.results?.length > 0) {
+            const murkup = createMoviesMarkup(data?.results);
+
+            showLoader(false);
+            refs.moviesList.insertAdjacentHTML('beforeend', murkup);
+
+            if (data.page < data.total_pages) {
+                currentPage = data.page += 1;
+                showLoadMoreBtn(true);
+            }
+        } else {
+            showLoader(false);
+        };
     } else {
-        const data = await getSearchMovies(settings.qery, settings.currentPage);
-        handlerSearchRequst(data);
+
     }
 });
 
